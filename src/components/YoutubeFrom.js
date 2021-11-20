@@ -39,43 +39,46 @@ const YoutubeFrom = () => {
         onSubmit,
         validate
     })
-    console.log('Form errors : ', formik.errors)
+    console.log('Visited Field : ', formik.touched)
 
     return (
         <div>
             <h1>Youtube From</h1>
             <form onSubmit={formik.handleSubmit} >
                 <div className='form-control'>
-                <label htmlFor='name' >Name</label>
-                <input type='text'
-                    name='name'
-                    id='name'
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                />
-                {formik.errors.name ? <div className='error'>{formik.errors.name}</div> : null}
+                    <label htmlFor='name' >Name</label>
+                    <input type='text'
+                        name='name'
+                        id='name'
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.name}
+                    />
+                    {formik.touched.name && formik.errors.name ? <div className='error'>{formik.errors.name}</div> : null}
                 </div>
 
                 <div className='form-control'>
-                <label htmlFor='email' >Email</label>
-                <input type='email'
-                    name='email'
-                    id='email'
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                />
-                {formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
+                    <label htmlFor='email' >Email</label>
+                    <input type='email'
+                        name='email'
+                        id='email'
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                    {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
                 </div>
 
                 <div className='form-control'>
-                <label htmlFor='channel' >Channel</label>
-                <input type='text'
-                    name='channel'
-                    id='channel'
-                    onChange={formik.handleChange}
-                    value={formik.values.channel}
-                />
-                {formik.errors.channel ? <div className='error'>{formik.errors.channel}</div> : null}
+                    <label htmlFor='channel' >Channel</label>
+                    <input type='text'
+                        name='channel'
+                        id='channel'
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.channel}
+                    />
+                    {formik.touched.channel && formik.errors.channel ? <div className='error'>{formik.errors.channel}</div> : null}
                 </div>
 
                 <button type='submit'>Submit</button>
