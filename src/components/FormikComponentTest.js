@@ -29,14 +29,22 @@ const validationSchema = Yup.object({
     address: Yup.string().required('Required!'),
 })
 
+const validateComments = value => {
+    let error
+    if (!value) {
+        error= 'Required'
+    }
+    return error
+}
+
 const FormikComponentTest = () => {
     return (
         <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
             validationSchema={validationSchema}
-            // validateOnChange={false}
-            // validateOnBlur={false}
+        // validateOnChange={false}
+        // validateOnBlur={false}
         >
             <Form>
                 <h1>Formik Component Youtube From</h1>
@@ -62,8 +70,8 @@ const FormikComponentTest = () => {
 
                 <div className='form-control'>
                     <label htmlFor='comments' >Comments</label>
-                    <Field as='textarea' type='text' id='comments' name='comments' />
-                    <ErrorMessage name='comments' />
+                    <Field as='textarea' type='text' id='comments' name='comments' validate={validateComments} />
+                    <ErrorMessage name='comments' component={TextError} />
                 </div>
 
                 <div className='form-control'>
@@ -123,7 +131,7 @@ const FormikComponentTest = () => {
                                                     <Field name={`phNumbers[${index}]`} />
                                                     {
                                                         index > 0 &&
-                                                    <button type='button' onClick={() => remove(index)}> - </button>
+                                                        <button type='button' onClick={() => remove(index)}> - </button>
                                                     }
                                                     <button type='button' onClick={() => push('')}> + </button>
                                                 </div>
