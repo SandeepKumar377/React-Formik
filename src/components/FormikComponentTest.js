@@ -1,11 +1,14 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import TextError from './TextError';
 
 const initialValues = {
     name: '',
     email: '',
-    channel: ''
+    channel: '',
+    comments: '',
+    address: ''
 }
 
 const onSubmit = (values) => {
@@ -16,6 +19,7 @@ const validationSchema = Yup.object({
     name: Yup.string().required('Name is Required!'),
     email: Yup.string().email('Invalid email!').required('Email is Required!'),
     channel: Yup.string().required('Channel name is Required!'),
+    address: Yup.string().required('Required!'),
 })
 
 const FormikComponentTest = () => {
@@ -30,19 +34,46 @@ const FormikComponentTest = () => {
                 <div className='form-control'>
                     <label htmlFor='name' >Name</label>
                     <Field type='text' id='name' name='name' />
-                    <ErrorMessage name='name' />
+                    <ErrorMessage component={TextError} name='name' />
                 </div>
 
                 <div className='form-control'>
                     <label htmlFor='email' >E-mail</label>
                     <Field type='email' id='email' name='email' />
-                    <ErrorMessage name='email' />
+                    <ErrorMessage name='email'>
+                        {errorMsg => <div className="error">{errorMsg}</div>}
+                    </ErrorMessage>
                 </div>
 
                 <div className='form-control'>
                     <label htmlFor='channel' >Channel</label>
                     <Field type='text' id='channel' name='channel' />
                     <ErrorMessage name='channel' />
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor='comments' >Comments</label>
+                    <Field as='textarea' type='text' id='comments' name='comments' />
+                    <ErrorMessage name='comments' />
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor='address' >Address</label>
+                    <Field id='address' name='address'>
+                        {
+                            (props) => {
+                                const { field, form, meta } = props
+                                console.log('Render props', props)
+                                return (
+                                    <div>
+                                        <input type='text' id='address' {...field} />
+                                        {meta.touched && meta.error ? <div>meta.error</div> : null}
+                                    </div>
+                                )
+                            }
+                        }
+                    </Field>
+                    <ErrorMessage name='address' component={TextError} />
                 </div>
 
                 <button type='submit'>Submit</button>
