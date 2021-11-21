@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
+import { Formik, Field, Form, ErrorMessage, FieldArray, FastField } from 'formik';
 import * as Yup from 'yup';
 import TextError from './TextError';
 
@@ -66,11 +66,11 @@ const FormikComponentTest = () => {
 
                 <div className='form-control'>
                     <label htmlFor='address' >Address</label>
-                    <Field id='address' name='address'>
+                    <FastField id='address' name='address'>
                         {
                             (props) => {
+                                console.log('Address Field Render')
                                 const { field, form, meta } = props
-                                console.log('Render props', props)
                                 return (
                                     <div>
                                         <input type='text' id='address' {...field} />
@@ -79,7 +79,7 @@ const FormikComponentTest = () => {
                                 )
                             }
                         }
-                    </Field>
+                    </FastField>
                     <ErrorMessage name='address' component={TextError} />
                 </div>
 
@@ -108,7 +108,7 @@ const FormikComponentTest = () => {
                     <FieldArray name='phNumbers'>
                         {
                             (fieldArrayProps) => {
-                                console.log('fieldArrayProps', fieldArrayProps)
+                                // console.log('fieldArrayProps', fieldArrayProps)
                                 const { push, remove, form } = fieldArrayProps
                                 const { values } = form
                                 const { phNumbers } = values
