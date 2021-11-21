@@ -12,7 +12,8 @@ const initialValues = {
     social: {
         facebook: '',
         twitter: ''
-    }
+    },
+    phoneNumber: ['', '']
 
 }
 
@@ -89,6 +90,16 @@ const FormikComponentTest = () => {
                 <div className='form-control'>
                     <label htmlFor='twitter' >Twitter Profile</label>
                     <Field type='text' id='twitter' name='social.twitter' />
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor='phoneNumber' >Primary Phone Number</label>
+                    <Field type='text' id='priPhoneNumber' name='phoneNumber[0]' />
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor='phoneNumber' >Secondary Phone Number</label>
+                    <Field type='text' id='secPhoneNumber' name='phoneNumber[1]' />
                 </div>
 
                 <button type='submit'>Submit</button>
