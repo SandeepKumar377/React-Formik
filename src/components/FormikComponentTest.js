@@ -35,6 +35,8 @@ const FormikComponentTest = () => {
             initialValues={initialValues}
             onSubmit={onSubmit}
             validationSchema={validationSchema}
+            // validateOnChange={false}
+            // validateOnBlur={false}
         >
             <Form>
                 <h1>Formik Component Youtube From</h1>
@@ -69,18 +71,18 @@ const FormikComponentTest = () => {
                     <FastField id='address' name='address'>
                         {
                             (props) => {
-                                console.log('Address Field Render')
                                 const { field, form, meta } = props
+                                console.log('Address Field Render', meta)
                                 return (
                                     <div>
                                         <input type='text' id='address' {...field} />
-                                        {meta.touched && meta.error ? <div>meta.error</div> : null}
+                                        {meta.touched && meta.error ? <div>{meta.error}</div> : null}
                                     </div>
                                 )
                             }
                         }
                     </FastField>
-                    <ErrorMessage name='address' component={TextError} />
+                    {/* <ErrorMessage name='address' component={TextError} /> */}
                 </div>
 
                 <div className='form-control'>
@@ -112,6 +114,7 @@ const FormikComponentTest = () => {
                                 const { push, remove, form } = fieldArrayProps
                                 const { values } = form
                                 const { phNumbers } = values
+                                console.log('Form errors : ', form.errors)
                                 return (
                                     <div>
                                         {
