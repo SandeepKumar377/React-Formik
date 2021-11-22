@@ -32,7 +32,7 @@ const validationSchema = Yup.object({
 const validateComments = value => {
     let error
     if (!value) {
-        error= 'Required'
+        error = 'Required'
     }
     return error
 }
@@ -46,106 +46,117 @@ const FormikComponentTest = () => {
         // validateOnChange={false}
         // validateOnBlur={false}
         >
-            <Form>
-                <h1>Formik Component Youtube From</h1>
-                <div className='form-control'>
-                    <label htmlFor='name' >Name</label>
-                    <Field type='text' id='name' name='name' />
-                    <ErrorMessage component={TextError} name='name' />
-                </div>
+            {
+                formik => {
+                    console.log('Formik props:', formik)
+                    return (
+                        <Form>
+                            <h1>Formik Component Youtube From</h1>
+                            <div className='form-control'>
+                                <label htmlFor='name' >Name</label>
+                                <Field type='text' id='name' name='name' />
+                                <ErrorMessage component={TextError} name='name' />
+                            </div>
 
-                <div className='form-control'>
-                    <label htmlFor='email' >E-mail</label>
-                    <Field type='email' id='email' name='email' />
-                    <ErrorMessage name='email'>
-                        {errorMsg => <div className="error">{errorMsg}</div>}
-                    </ErrorMessage>
-                </div>
+                            <div className='form-control'>
+                                <label htmlFor='email' >E-mail</label>
+                                <Field type='email' id='email' name='email' />
+                                <ErrorMessage name='email'>
+                                    {errorMsg => <div className="error">{errorMsg}</div>}
+                                </ErrorMessage>
+                            </div>
 
-                <div className='form-control'>
-                    <label htmlFor='channel' >Channel</label>
-                    <Field type='text' id='channel' name='channel' />
-                    <ErrorMessage name='channel' />
-                </div>
+                            <div className='form-control'>
+                                <label htmlFor='channel' >Channel</label>
+                                <Field type='text' id='channel' name='channel' />
+                                <ErrorMessage name='channel' component={TextError } />
+                            </div>
 
-                <div className='form-control'>
-                    <label htmlFor='comments' >Comments</label>
-                    <Field as='textarea' type='text' id='comments' name='comments' validate={validateComments} />
-                    <ErrorMessage name='comments' component={TextError} />
-                </div>
+                            <div className='form-control'>
+                                <label htmlFor='comments' >Comments</label>
+                                <Field as='textarea' type='text' id='comments' name='comments' validate={validateComments} />
+                                <ErrorMessage name='comments' component={TextError} />
+                            </div>
 
-                <div className='form-control'>
-                    <label htmlFor='address' >Address</label>
-                    <FastField id='address' name='address'>
-                        {
-                            (props) => {
-                                const { field, form, meta } = props
-                                console.log('Address Field Render', meta)
-                                return (
-                                    <div>
-                                        <input type='text' id='address' {...field} />
-                                        {meta.touched && meta.error ? <div>{meta.error}</div> : null}
-                                    </div>
-                                )
-                            }
-                        }
-                    </FastField>
-                    {/* <ErrorMessage name='address' component={TextError} /> */}
-                </div>
-
-                <div className='form-control'>
-                    <label htmlFor='facebook' >Facebook Profile</label>
-                    <Field type='text' id='facebook' name='social.facebook' />
-                </div>
-
-                <div className='form-control'>
-                    <label htmlFor='twitter' >Twitter Profile</label>
-                    <Field type='text' id='twitter' name='social.twitter' />
-                </div>
-
-                <div className='form-control'>
-                    <label htmlFor='phoneNumber' >Primary Phone Number</label>
-                    <Field type='text' id='priPhoneNumber' name='phoneNumber[0]' />
-                </div>
-
-                <div className='form-control'>
-                    <label htmlFor='phoneNumber' >Secondary Phone Number</label>
-                    <Field type='text' id='secPhoneNumber' name='phoneNumber[1]' />
-                </div>
-
-                <div className='form-control'>
-                    <label htmlFor='phoneNumber' >List of Phone Number</label>
-                    <FieldArray name='phNumbers'>
-                        {
-                            (fieldArrayProps) => {
-                                // console.log('fieldArrayProps', fieldArrayProps)
-                                const { push, remove, form } = fieldArrayProps
-                                const { values } = form
-                                const { phNumbers } = values
-                                console.log('Form errors : ', form.errors)
-                                return (
-                                    <div>
-                                        {
-                                            phNumbers.map((phNumber, index) => (
-                                                <div key={index}>
-                                                    <Field name={`phNumbers[${index}]`} />
-                                                    {
-                                                        index > 0 &&
-                                                        <button type='button' onClick={() => remove(index)}> - </button>
-                                                    }
-                                                    <button type='button' onClick={() => push('')}> + </button>
+                            <div className='form-control'>
+                                <label htmlFor='address' >Address</label>
+                                <FastField id='address' name='address'>
+                                    {
+                                        (props) => {
+                                            const { field, form, meta } = props
+                                            console.log('Address Render', form.errors)
+                                            return (
+                                                <div>
+                                                    <input type='text' id='address' {...field} />
+                                                    {meta.touched && meta.error ? <div className='error'>{meta.error}</div> : null}
                                                 </div>
-                                            ))
+                                            )
                                         }
-                                    </div>
-                                )
-                            }
-                        }
-                    </FieldArray>
-                </div>
+                                    }
+                                </FastField>
+                                {/* <ErrorMessage name='address' component={TextError} /> */}
+                            </div>
 
-                <button type='submit'>Submit</button>
-            </Form>
+                            <div className='form-control'>
+                                <label htmlFor='facebook' >Facebook Profile</label>
+                                <Field type='text' id='facebook' name='social.facebook' />
+                            </div>
+
+                            <div className='form-control'>
+                                <label htmlFor='twitter' >Twitter Profile</label>
+                                <Field type='text' id='twitter' name='social.twitter' />
+                            </div>
+
+                            <div className='form-control'>
+                                <label htmlFor='phoneNumber' >Primary Phone Number</label>
+                                <Field type='text' id='priPhoneNumber' name='phoneNumber[0]' />
+                            </div>
+
+                            <div className='form-control'>
+                                <label htmlFor='phoneNumber' >Secondary Phone Number</label>
+                                <Field type='text' id='secPhoneNumber' name='phoneNumber[1]' />
+                            </div>
+
+                            <div className='form-control'>
+                                <label htmlFor='phoneNumber' >List of Phone Number</label>
+                                <FieldArray name='phNumbers'>
+                                    {
+                                        (fieldArrayProps) => {
+                                            const { push, remove, form } = fieldArrayProps
+                                            const { values } = form
+                                            const { phNumbers } = values
+                                            console.log('Form errors : ', form.errors)
+                                            return (
+                                                <div>
+                                                    {
+                                                        phNumbers.map((phNumber, index) => (
+                                                            <div key={index}>
+                                                                <Field name={`phNumbers[${index}]`} />
+                                                                {
+                                                                    index > 0 &&
+                                                                    <button type='button' onClick={() => remove(index)}> - </button>
+                                                                }
+                                                                <button type='button' onClick={() => push('')}> + </button>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>
+                                            )
+                                        }
+                                    }
+                                </FieldArray>
+                            </div>
+
+                            <button type='button' onClick={()=>formik.validateField('comments')} >Validate comments</button>
+                            <button type='button' onClick={()=>formik.validateForm()} >Validate all</button>
+                            <button type='button' onClick={()=>formik.setFieldTouched('comments')} >Visit comments</button>
+                            <button type='button' onClick={()=>formik.setTouched({name:true,channel:true,email:true,comments:true,phNumbers:true})} >Visit fields</button>
+                            <button type='submit'>Submit</button>
+                        </Form>
+                    )
+                }
+            }
+
         </Formik>
     )
 }
