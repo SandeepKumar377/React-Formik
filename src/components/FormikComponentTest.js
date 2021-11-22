@@ -151,7 +151,7 @@ const FormikComponentTest = () => {
                             <button type='button' onClick={()=>formik.validateForm()} >Validate all</button>
                             <button type='button' onClick={()=>formik.setFieldTouched('comments')} >Visit comments</button>
                             <button type='button' onClick={()=>formik.setTouched({name:true,channel:true,email:true,comments:true,phNumbers:true})} >Visit fields</button>
-                            <button type='submit'>Submit</button>
+                            <button type='submit' disabled={ !(formik.dirty && formik.isValid)}>Submit</button>
                         </Form>
                     )
                 }
