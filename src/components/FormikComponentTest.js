@@ -35,6 +35,7 @@ const onSubmit = (values, onSubmitProps) => {
     console.log('Form Values : ', values)
     console.log('onSubmit Props : ', onSubmitProps)
     onSubmitProps.setSubmitting(false)
+    onSubmitProps.resetForm()
 }
 
 const validationSchema = Yup.object({
@@ -56,7 +57,7 @@ const FormikComponentTest = () => {
     const [formValues, setFormValues] = useState(null)
     return (
         <Formik
-            initialValues={ formValues || initialValues}
+            initialValues={formValues || initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
             enableReinitialize
@@ -176,7 +177,8 @@ const FormikComponentTest = () => {
                                     phNumbers: true
                                 })} >Visit fields</button> */}
 
-                            <button type='button' onClick={()=>setFormValues(savedValues)} >Load save data</button>
+                            <button type='reset'>Reset</button>
+                            <button type='button' onClick={() => setFormValues(savedValues)} >Load save data</button>
                             <button type='submit' disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
                         </Form>
                     )
