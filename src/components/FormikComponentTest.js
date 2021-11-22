@@ -18,8 +18,10 @@ const initialValues = {
 
 }
 
-const onSubmit = (values) => {
+const onSubmit = (values, onSubmitProps) => {
     console.log('Form Values : ', values)
+    console.log('onSubmit Props : ', onSubmitProps)
+    onSubmitProps.setSubmitting(false)
 }
 
 const validationSchema = Yup.object({
@@ -69,7 +71,7 @@ const FormikComponentTest = () => {
                             <div className='form-control'>
                                 <label htmlFor='channel' >Channel</label>
                                 <Field type='text' id='channel' name='channel' />
-                                <ErrorMessage name='channel' component={TextError } />
+                                <ErrorMessage name='channel' component={TextError} />
                             </div>
 
                             <div className='form-control'>
@@ -147,11 +149,18 @@ const FormikComponentTest = () => {
                                 </FieldArray>
                             </div>
 
-                            <button type='button' onClick={()=>formik.validateField('comments')} >Validate comments</button>
-                            <button type='button' onClick={()=>formik.validateForm()} >Validate all</button>
-                            <button type='button' onClick={()=>formik.setFieldTouched('comments')} >Visit comments</button>
-                            <button type='button' onClick={()=>formik.setTouched({name:true,channel:true,email:true,comments:true,phNumbers:true})} >Visit fields</button>
-                            <button type='submit' disabled={ !(formik.dirty && formik.isValid)}>Submit</button>
+                            <button type='button' onClick={() => formik.validateField('comments')} >Validate comments</button>
+                            <button type='button' onClick={() => formik.validateForm()} >Validate all</button>
+                            <button type='button' onClick={() => formik.setFieldTouched('comments')} >Visit comments</button>
+                            <button type='button' onClick={() => formik.setTouched(
+                                {
+                                    name: true,
+                                    channel: true,
+                                    email: true,
+                                    comments: true,
+                                    phNumbers: true
+                                })} >Visit fields</button>
+                            <button type='submit' disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
                         </Form>
                     )
                 }
