@@ -1,11 +1,16 @@
 import React from 'react'
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import FormikControl from './FormikControl';
 
 const FormikContainer = () => {
 
-    const initialValues = {}
-    const validationSchema = Yup.object({})
+    const initialValues = {
+        email: ''
+    }
+    const validationSchema = Yup.object({
+        email: Yup.string().required('Email is Required')
+    })
     const onSubmit = values => console.log('Form data', values)
 
     return (
@@ -16,7 +21,13 @@ const FormikContainer = () => {
         >
             {formik => (
                 <Form>
-                    <submit type='submit'>Submit</submit>
+                    <FormikControl
+                        control='input'
+                        type='email'
+                        label='Email'
+                        name='email'
+                    />
+                    <button type='submit'>Submit</button>
                 </Form>
             )}
         </Formik>
