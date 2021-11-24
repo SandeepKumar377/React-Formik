@@ -5,7 +5,7 @@
 
 label {
   font-weight: bold;
-  display: flex;
+  display:inline-flex;
   margin-bottom: 5px;
 }
 
@@ -22,7 +22,6 @@ textarea, select {
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  /* margin-bottom: 20px; */
 }
 .form-control{
   margin-bottom: 20px;
