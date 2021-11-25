@@ -1,5 +1,6 @@
 import './App.css';
-import RegistrationForm from './components/formikDemo2/RegistrationForm';
+import EnrollmentForm from './components/formikDemo2/EnrollmentForm';
+// import RegistrationForm from './components/formikDemo2/RegistrationForm';
 // import LoginForm from './components/formikDemo2/LoginForm';
 // import FormikContainer from './components/formikDemo2/FormikContainer';
 // import FormikComponentTest from './components/FormikComponentTest';
@@ -9,7 +10,8 @@ import RegistrationForm from './components/formikDemo2/RegistrationForm';
 function App() {
   return (
     <div className="App">
-      <RegistrationForm />
+      <EnrollmentForm />
+      {/* <RegistrationForm /> */}
       {/* <LoginForm /> */}
       {/* <FormikContainer /> */}
       {/* <FormikComponentTest /> */}
