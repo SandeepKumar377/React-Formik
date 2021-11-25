@@ -29,3 +29,6 @@ textarea, select {
 .error{
   color: red;
 }
+.radio-op label{
+  margin-right: 20px;
+}
